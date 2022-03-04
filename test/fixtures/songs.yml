@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  peak: 1
+  run_time: MyString
+  chart_time: MyString
+  title: MyString
+  artist: one
+
+two:
+  peak: 1
+  run_time: MyString
+  chart_time: MyString
+  title: MyString
+  artist: two
