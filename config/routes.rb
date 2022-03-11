@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
 
   namespace :api do
+
     resources :charts do
       resources :artists
     end
@@ -12,13 +13,5 @@ Rails.application.routes.draw do
     resources :artists, except: [:index, :show, :update, :create, :destroy] do
       resources :songs
     end
-
-
-
-
-
-
-
-
   end
 end
