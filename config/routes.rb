@@ -3,4 +3,15 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "articles#index"
+
+  namespace :api do
+
+    resources :charts do
+      resources :artists
+    end
+
+    resources :artists, except: [:index, :show, :update, :create, :destroy] do
+      resources :songs
+    end
+  end
 end
