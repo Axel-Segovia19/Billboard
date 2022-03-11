@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ChartForm from './components/charts/ChartForm';
+import ChartList from './components/charts/ChartList';
 const App = () => {
   const [charts, setCharts] = useState([])//we might need to modify this since we have input of our own.
 
@@ -26,7 +27,7 @@ const App = () => {
 
   const updateChart = (id, chart) => {
    // TODO make a call to rails to update the item using params
-  // updare the state
+    axios.put(`'/api/charts/${:id}`, )
   }
 
   const deleteChart = (id) => {

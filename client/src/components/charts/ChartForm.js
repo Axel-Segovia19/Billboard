@@ -29,7 +29,7 @@ const ChartForm = ({ addChart}) => {
         <input
           name='position'
           value={chart.position}
-          onChange={ (e) => setChart({ ...chart, name: e.target.value })}
+          onChange={ (e) => setChart({ ...chart, position: e.target.value })}
 
   
           required
