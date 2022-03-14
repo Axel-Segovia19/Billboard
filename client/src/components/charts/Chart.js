@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import ChartForm from './ChartForm';
-// import Artists from '../artists/Artists';
-// import { Link } from 'react-router-dom';
+import Artists from '../artists/Artists';
+import { Link } from 'react-router-dom';
 
 const Chart = ({ id, name, updateChart, deleteChart }) => {
   const [editing, setEdit] = useState(false)
@@ -25,42 +25,42 @@ const Chart = ({ id, name, updateChart, deleteChart }) => {
         <>
           <button 
             onClick={() => setEdit(true)}
-  
+            style={styles.btn}
           >
             Edit
           </button>
           <button 
             onClick={() => deleteChart(id)}
-            // style={styles.deleteBtn} how to apply styles made below
+            style={styles.deleteBtn}
           >
             Delete
           </button>
           {/* <Topics subId={id} /> */}
-          {/* <Link 
+          <Link 
             to={`/charts/${id}/`}
             state={{ chartId: id, chartName: name }}
           >
             Artists
-          </Link> */}
+          </Link>
         </>
       }
     </>
   )
 }
 // styling as a module
-// const styles = {
-//   btn: {
-//     background: 'yellow',
-//     color: 'orange',
-//     fontSize: '12px',
-//     borderRadius: '10px',
-//   },
-//   deleteBtn: {
-//     background: 'red',
-//     color: 'white',
-//     fontSize: '12px',
-//     borderRadius: '5px',
-//   }
-
+const styles = {
+  btn: {
+    background: 'yellow',
+    color: 'orange',
+    fontSize: '12px',
+    borderRadius: '10px',
+  },
+  deleteBtn: {
+    background: 'red',
+    color: 'white',
+    fontSize: '12px',
+    borderRadius: '5px',
+  }
+}
 
 export default Chart;
