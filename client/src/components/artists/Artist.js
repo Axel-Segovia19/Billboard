@@ -5,8 +5,8 @@ import ArtistList from './ArtistList';
 import { useLocation, useParams } from 'react-router-dom';
 
 
-const Artists = ({}) => {
-  const [topics, setArtists] = useState([])
+const Artist = ({}) => {
+  const [artists, setArtists] = useState([])
   const location = useLocation();
   const { chartId, chartTitle } = location.state
 
@@ -62,4 +62,4 @@ const Artists = ({}) => {
   )
 }
 
-export default Artists;
+export default Artist;

@@ -12,7 +12,7 @@ const ArtistForm = ({ addArtist, id, name, genre, updateArtist, setEdit }) => {
   const handleSubmit = (e) => {
     e.preventDefault()
     if (id) {
-      updateTopic(id, artist)
+      updateArtist(id, artist)
       setEdit(false)
     } else {
       addArtist(artist)
