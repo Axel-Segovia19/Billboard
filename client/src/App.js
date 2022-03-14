@@ -15,8 +15,7 @@ const App = () => {
   }, [])
 
   const addChart = (chart) => {
-  //TODO make a call to our rails to create the item using the params
-  //TODO update the state
+
   axios.post('/api/charts', { chart })
     .then( res => {
       setCharts([...charts, res.data ])
@@ -26,19 +25,36 @@ const App = () => {
 
 
   const updateChart = (id, chart) => {
-   // TODO make a call to rails to update the item using params
-    axios.put(`'/api/charts/${:id}`, )
+    axios.put(`'/api/charts/${id}`, { chart })
+    .then( res => {
+      const newUpdatedCharts = charts.map( c => {
+        if (c.id === id) {
+          return res.data
+        }
+        return c
+      })
+      setCharts(newUpdatedCharts)
+    })
+    .catch( err => console.log(err) )
   }
 
   const deleteChart = (id) => {
-  // TODO make a call to our rails to delete item
-  //TODO delete item in teh stae, display message
+    axios.delete(`/api/charts/${id}`)
+      .then(res => {
+          setCharts(charts.filter(c => c.id !== id ))
+          alert(res.data.message)
+      }) .catch( err => console.log(err) )
   }
 
 return(
     <>
   <h1>Charts</h1>
   <ChartForm addChart={addChart} />
+  <ChartList
+      charts={charts}
+      updateChart={updateChart}
+      deleteChart={deleteChart}
+      />
     </>
   )
 }
