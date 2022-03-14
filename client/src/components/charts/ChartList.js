@@ -1,6 +1,6 @@
-import Chart from './Chart';
+import Chart from './Chart.js';
 
-const Chartlist = ({ charts, updateChart, deleteChart }) => (
+const ChartList = ({ charts, updateChart, deleteChart }) => (
 <>
   {charts.map( c =>
     <Chart
@@ -13,4 +13,4 @@ const Chartlist = ({ charts, updateChart, deleteChart }) => (
    </>
 )
 
-export default Chartlist;
+export default ChartList;
