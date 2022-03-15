@@ -4,15 +4,12 @@ import ArtistForm from './ArtistForm';
 import ArtistList from './ArtistList.js';
 import { useLocation, useParams } from 'react-router-dom';
 
-// const Topics = ({ subId }) => {
+
 const Artists = ({}) => {
-  const [topics, setArtists] = useState([])
-  // if you want to grab the id from the link state then:
+  const [artists, setArtists] = useState([])
   const location = useLocation();
   const { chartId, chartTitle } = location.state
 
-  // is you want to grab the id from the url then
-  // const { subId,  } = useParams()
 
   useEffect( () => {
     axios.get(`/api/charts/${chartId}/artists`)
@@ -21,7 +18,7 @@ const Artists = ({}) => {
   }, [])
 
   // create
-  const addArtist = (topic) => {
+  const addArtist = (artist) => {
     axios.post(`/api/charts/${chartId}/artists`, { artist })
     .then( res => setArtists([...artists, res.data]) )
     .catch( err => console.log(err))
@@ -31,11 +28,11 @@ const Artists = ({}) => {
   const updateArtist = (id, artist) => {
     axios.put(`/api/charts/${chartId}/artists/${id}`, { artist })
       .then( res => {
-        const newUpdatedArtists = artist.map( t => {
-          if (t.id === id) {
+        const newUpdatedArtists = artists.map( a => {
+          if (a.id === id) {
             return res.data 
           }
-          return t
+          return a
         })
         setArtists(newUpdatedArtists)
       })
@@ -44,9 +41,9 @@ const Artists = ({}) => {
 
   // destroy
   const deleteArtist = (id) => {
-    axios.delete(`/api/chart/${chartId}/artists/${id}`)
+    axios.delete(`/api/charts/${chartId}/artists/${id}`)
       .then( res => {
-        setArtists( artist.filter( t => t.id !== id ))
+        setArtists( artists.filter( a => a.id !== id ))
         alert(res.data.message)
       })
       .catch( err => console.log(err))

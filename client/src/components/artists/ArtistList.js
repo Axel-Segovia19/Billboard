@@ -1,8 +1,8 @@
-import Artist from './Artist.js';
+import Artist from './Artist';
 
 const ArtistList = ({ artists, updateArtist, deleteArtist }) => (
 <>
-  {artists.map( c =>
+  {artists.map( a =>
     <Artist
       key={a.id}
       {...a}

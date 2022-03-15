@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import ChartForm from './ChartForm';
-import Artists from '../artists/Artists';
 import { Link } from 'react-router-dom';
 
 const Chart = ({ id, name, updateChart, deleteChart }) => {
@@ -35,12 +34,11 @@ const Chart = ({ id, name, updateChart, deleteChart }) => {
           >
             Delete
           </button>
-          {/* <Topics subId={id} /> */}
           <Link 
-            to={`/charts/${id}/`}
+            to={`/charts/${id}/artists`}
             state={{ chartId: id, chartName: name }}
           >
-            Artists
+          Artists
           </Link>
         </>
       }

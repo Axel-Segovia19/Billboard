@@ -1,63 +1,38 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import SongForm from './SongForm';
-import SongtList from './SongList';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
+// export Link
+const Song = ({ id, peak, run_time, title, chart_time, updateSong, deleteSong }) => {
+  const [editing, setEdit] = useState(false)
 
-const Song = ({}) => {
-  const [songs, setSongs] = useState([])
-  const location = useLocation();
-  const { songId, Title } = location.state
-
-  useEffect( () => {
-    axios.get(`/api/charts/${chartId}/artists`)
-      .then( res => setSongs(res.data) )
-      .catch( err => console.log(err))
-  }, [])
-
-  // create
-  const addSong = (Title) => {
-    axios.post(`/api/charts/${chartId}/artists`, { artist })
-    .then( res => setSongs([...songs, res.data]) )
-    .catch( err => console.log(err))
-  }
-
-  // update 
-  const updateSong = (id, title) => {
-    axios.put(`/api/charts/${chartId}/artists/${id}`, { artist })
-      .then( res => {
-        const newUpdatedSongs = song.map( s => {
-          if (s.id === id) {
-            return res.data 
-          }
-          return s
-        })
-        setSongs(newUpdatedSongs)
-      })
-      .catch( err => console.log(err))
-  }
-
-  // destroy
-  const deleteSongs = (id) => {
-    axios.delete(`/api/chart/${chartId}/artists/${id}`)
-      .then( res => {
-        setSongs( song.filter( s => s.id !== id ))
-        alert(res.data.message)
-      })
-      .catch( err => console.log(err))
-  }
-
-  return (
+  return(
     <>
-      <h1>Artist: {artistName}</h1>
-      <h3>Songs</h3>
-      <SongForm addSong={addSong} />
-      <SongList
-        songs={songs}
-        updateSong={updateSong}
-        deleteSong={deleteSong}
-      />
+      {
+        editing ?
+          <>
+            <SongForm
+              id={id}
+              title={title}
+              peak={peak}
+              run_time={run_time}
+              chart_time={chart_time}
+              updateSong={updateSong}
+              setEdit={setEdit}
+            />
+            <button onClick={() => setEdit(false)}>Cancel</button>
+          </>
+        :
+        <>
+          <h1>Title: {title}</h1>
+          <p>{run_time}</p>
+          <p>{chart_time}</p>
+          <p>{peak}</p>
+          <button onClick={() => setEdit(true)}>Edit</button>
+          <button onClick={() => deleteSong(id)}>Delete</button>
+    
+        </>
+      }
     </>
   )
 }
