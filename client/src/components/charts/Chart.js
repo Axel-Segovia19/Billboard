@@ -24,13 +24,13 @@ const Chart = ({ id, name, updateChart, deleteChart }) => {
         <>
           <button 
             onClick={() => setEdit(true)}
-            style={styles.btn}
+           
           >
             Edit
           </button>
           <button 
             onClick={() => deleteChart(id)}
-            style={styles.deleteBtn}
+           
           >
             Delete
           </button>
@@ -44,21 +44,6 @@ const Chart = ({ id, name, updateChart, deleteChart }) => {
       }
     </>
   )
-}
-// styling as a module
-const styles = {
-  btn: {
-    background: 'yellow',
-    color: 'orange',
-    fontSize: '12px',
-    borderRadius: '10px',
-  },
-  deleteBtn: {
-    background: 'red',
-    color: 'white',
-    fontSize: '12px',
-    borderRadius: '5px',
-  }
 }
 
 export default Chart;

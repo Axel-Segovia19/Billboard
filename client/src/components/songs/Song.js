@@ -24,7 +24,7 @@ const Song = ({ id, peak, run_time, title, chart_time, updateSong, deleteSong })
           </>
         :
         <>
-          <h1>Title: {title}</h1>
+          <h1 style={{ color: 'teal', fontSize: '34px' }}>Title: {title}</h1>
           <p>{run_time}</p>
           <p>{chart_time}</p>
           <p>{peak}</p>
