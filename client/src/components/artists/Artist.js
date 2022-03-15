@@ -23,7 +23,7 @@ const Artist = ({ id, name, upcoming, genre, updateArtist, deleteArtist }) => {
           </>
         :
         <>
-          <h1>Title: {name}</h1>
+          <h1 style={{ color: 'teal', fontSize: '34px' }}>Title: {name}</h1>
           <p>{genre}</p>
           <p>Favorite: {upcoming ? "☆ Yes" : "x no"}</p>
           <button onClick={() => setEdit(true)}>Edit</button>
