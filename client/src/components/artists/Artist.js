@@ -1,63 +1,40 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import ArtistForm from './ArtistForm';
-import ArtistList from './ArtistList';
-import { useLocation, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
+// export Link
+const Artist = ({ id, name, upcoming, genre, updateArtist, deleteArtist }) => {
+  const [editing, setEdit] = useState(false)
 
-const Artist = ({}) => {
-  const [artists, setArtists] = useState([])
-  const location = useLocation();
-  const { chartId, chartTitle } = location.state
-
-  useEffect( () => {
-    axios.get(`/api/charts/${chartId}/artists`)
-      .then( res => setArtists(res.data) )
-      .catch( err => console.log(err))
-  }, [])
-
-  // create
-  const addArtist = (topic) => {
-    axios.post(`/api/charts/${chartId}/artists`, { artist })
-    .then( res => setArtists([...artists, res.data]) )
-    .catch( err => console.log(err))
-  }
-
-  // update 
-  const updateArtist = (id, artist) => {
-    axios.put(`/api/charts/${chartId}/artists/${id}`, { artist })
-      .then( res => {
-        const newUpdatedArtists = artist.map( a => {
-          if (a.id === id) {
-            return res.data 
-          }
-          return a
-        })
-        setArtists(newUpdatedArtists)
-      })
-      .catch( err => console.log(err))
-  }
-
-  // destroy
-  const deleteArtist = (id) => {
-    axios.delete(`/api/chart/${chartId}/artists/${id}`)
-      .then( res => {
-        setArtists( artist.filter( a => a.id !== id ))
-        alert(res.data.message)
-      })
-      .catch( err => console.log(err))
-  }
-
-  return (
+  return(
     <>
-      <h1>Chart: {chartTitle}</h1>
-      <h3>Artists</h3>
-      <ArtistForm addArtist={addArtist} />
-      <ArtistList
-        artists={artists}
-        updateArtist={updateArtist}
-        deleteArtist={deleteArtist}
-      />
+      {
+        editing ?
+          <>
+            <ArtistForm
+              id={id}
+              name={name}
+              genre={genre}
+              upcoming={upcoming}
+              updateArtist={updateArtist}
+              setEdit={setEdit}
+            />
+            <button onClick={() => setEdit(false)}>Cancel</button>
+          </>
+        :
+        <>
+          <h1>Title: {name}</h1>
+          <p>{genre}</p>
+          <p>Favorite: {upcoming ? "☆ Yes" : "x no"}</p>
+          <button onClick={() => setEdit(true)}>Edit</button>
+          <button onClick={() => deleteArtist(id)}>Delete</button>
+          <Link to={`/artists/${id}/songs`}> 
+            <button>
+              go to Songs
+            </button>
+          </Link>
+        </>
+      }
     </>
   )
 }

@@ -1,12 +1,23 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-const ChartForm = ({ addChart}) => {
+const ChartForm = ({ addChart, id, name, award, position, updateChart, setEdit}) => {
   const [chart, setChart] = useState({ name: '', award: false, position: 0}) 
+
+  useEffect( () => {
+    if (id) {
+      setChart({ name, award, position })
+    }
+  }, [])
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addChart(chart)
-    setChart({ name: '', award: false, position: 0})
+    if (id) {
+      updateChart(id, chart)
+      setEdit(false)
+    } else {
+      addChart(chart)
+    }
+    setChart({ name: '', award: false, postion: 0 })
   }
   return(
     <>
@@ -21,11 +32,11 @@ const ChartForm = ({ addChart}) => {
           required
         />
 
-        <input type="checkbox"
+        {/* <input type="checkbox"
         name='award'
         value={chart.award}
         onChange={ (e) => setChart({ ...chart, award: e.target.value })}
-        />
+        /> */}
         <input
           name='position'
           value={chart.position}

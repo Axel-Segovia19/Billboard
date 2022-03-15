@@ -41,8 +41,7 @@ class Api::ArtistsController < ApplicationController
       @artist = @chart.artists.find(params[:id])
     end
 
-    def artists_params
+    def artist_params
       params.require(:artist).permit(:name, :upcoming, :genre)
     end
-  end
 end

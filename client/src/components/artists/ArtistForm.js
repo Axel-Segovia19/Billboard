@@ -25,7 +25,6 @@ const ArtistForm = ({ addArtist, id, name, genre, updateArtist, setEdit }) => {
       <form onSubmit={handleSubmit}>
         <label>Name:</label>
         <input
-          // type="number"
           name="name" 
           value={artist.name}
           onChange={(e) => setArtist({ ...artist, name: e.target.value })}
